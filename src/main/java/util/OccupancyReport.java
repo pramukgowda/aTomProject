@@ -1,0 +1,7 @@
+package util;
+import datastructures.WaitingListQueue;import model.Booking;import model.Room;import service.BookingService;import service.RoomService;import java.util.List;
+/** Occupancy, booking and revenue report. */
+public final class OccupancyReport{
+ private OccupancyReport(){}
+ public static void print(RoomService rs,BookingService bs,WaitingListQueue q){List<Room> rooms=rs.getRooms();int total=rooms.size(),occupied=0;for(Room r:rooms)if(r.isOccupied())occupied++;System.out.println("\n======= OCCUPANCY REPORT =======");System.out.println("Total rooms      : "+total);System.out.println("Occupied rooms   : "+occupied);System.out.println("Vacant rooms     : "+(total-occupied));System.out.printf("Occupancy rate   : %.1f%%%n",total==0?0.0:occupied*100.0/total);for(String type:RoomService.ROOM_TYPES){int count=0,inUse=0;for(Room r:rooms)if(r.getType().equals(type)){count++;if(r.isOccupied())inUse++;}System.out.printf("%-7s rooms    : %d/%d occupied%n",type,inUse,count);}System.out.println("Active bookings  : "+(bs.countByStatus(Booking.Status.ALLOCATED)+bs.countByStatus(Booking.Status.CHECKED_IN)));System.out.println("On waiting list  : "+q.size());System.out.println("Check-outs done  : "+bs.countByStatus(Booking.Status.CHECKED_OUT));System.out.println("Cancelled        : "+bs.countByStatus(Booking.Status.CANCELLED));System.out.println("Revenue earned   : Rs."+bs.getTotalRevenue());System.out.println("================================");}
+}
