@@ -24,9 +24,6 @@ JDK 17 or newer. No external dependencies.
 Linux/macOS: `bash run.sh` and `bash test.sh`.
 Windows: `run.bat` and `test.bat`.
 
-## Package JAR
-Linux/macOS: `bash package.sh`; Windows: `package.bat`. Launch with `java -jar dist/HotelBookingSystem.jar`.
-
 ## Structure
 `src/main/java/app` console UI; `model` domain classes; `service` booking and tariff services; `datastructures` FIFO waiting queue; `exceptions` custom exceptions; `util` helpers/reports; `src/test/java` regression tests.
 
